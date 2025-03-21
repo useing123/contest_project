@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  eslint: {
-    ignoreDuringBuilds: true,
+  images: {
+    domains: ['images.unsplash.com'],
   },
-  images: { unoptimized: true },
-};
+  // Enable App Router
+  experimental: {
+    appDir: true,
+  },
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

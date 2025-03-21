@@ -1,28 +1,135 @@
+// This is your Prisma schema file
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  posts     Post[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String    @id
+  email         String    @unique
+  firstName     String?
+  lastName      String?
+  profileImage  String?
+  bookings      Booking[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
-model Post {
-  id        String   @id @default(cuid())
-  title     String
-  content   String
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Destination {
+  id              String          @id @default(cuid())
+  name            String
+  type            DestinationType
+  description     String          @db.Text
+  imageUrl        String
+  distance        Int             // Distance in light minutes from Earth
+  travelTime      Int             // Travel time in hours
+  trips           Trip[]
+  accommodations  Accommodation[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+enum DestinationType {
+  SPACE_STATION
+  LUNAR_BASE
+  ORBITAL_HOTEL
+  MARS_COLONY
+  ASTEROID_OUTPOST
+}
+
+model Trip {
+  id              String       @id @default(cuid())
+  name            String
+  description     String       @db.Text
+  destinationId   String
+  destination     Destination  @relation(fields: [destinationId], references: [id])
+  departureDate   DateTime
+  returnDate      DateTime
+  availableSeats  Int
+  tripPackages    TripPackage[]
+  bookings        Booking[]
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+model SeatClass {
+  id              String        @id @default(cuid())
+  name            String
+  description     String        @db.Text
+  amenities       String[]
+  tripPackages    TripPackage[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model TripPackage {
+  id              String     @id @default(cuid())
+  name            String
+  description     String     @db.Text
+  tripId          String
+  trip            Trip       @relation(fields: [tripId], references: [id])
+  seatClassId     String
+  seatClass       SeatClass  @relation(fields: [seatClassId], references: [id])
+  price           Float
+  features        String[]
+  maxCapacity     Int
+  bookings        Booking[]
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}
+
+model Accommodation {
+  id              String             @id @default(cuid())
+  name            String
+  description     String             @db.Text
+  imageUrl        String
+  destinationId   String
+  destination     Destination        @relation(fields: [destinationId], references: [id])
+  type            AccommodationType
+  price           Float              // Price per night
+  rating          Float
+  amenities       String[]
+  maxOccupancy    Int
+  bookings        Booking[]
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+}
+
+enum AccommodationType {
+  LUXURY_POD
+  STANDARD_CABIN
+  VIP_SUITE
+  ZERO_G_CHAMBER
+  RESEARCH_QUARTERS
+}
+
+model Booking {
+  id              String        @id @default(cuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id])
+  tripId          String
+  trip            Trip          @relation(fields: [tripId], references: [id])
+  tripPackageId   String
+  tripPackage     TripPackage   @relation(fields: [tripPackageId], references: [id])
+  accommodationId String?
+  accommodation   Accommodation? @relation(fields: [accommodationId], references: [id])
+  status          BookingStatus
+  totalPrice      Float
+  passengers      Int
+  specialRequests String?       @db.Text
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
 }
