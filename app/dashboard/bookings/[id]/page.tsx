@@ -284,7 +284,7 @@ export default async function BookingDetailPage({ params }: { params: { id: stri
                       <div className="flex items-start">
                         <div className="relative h-20 w-20 rounded overflow-hidden mr-4 flex-shrink-0">
                           <Image 
-                            src={booking.accommodation.imageUrl || '/images/placeholder-accommodation.jpg'} 
+                            src="https://picsum.photos/1920/1080" 
                             alt={booking.accommodation.name} 
                             fill 
                             className="object-cover"

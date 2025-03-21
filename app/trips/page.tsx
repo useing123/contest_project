@@ -61,7 +61,7 @@ export default async function TripsPage({ searchParams }: TripsPageProps) {
       <section className="relative h-[40vh] w-full flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/images/trips-hero.jpg" 
+            src="https://picsum.photos/1920/1080" 
             alt="Space trips" 
             fill 
             priority

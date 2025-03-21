@@ -1,4 +1,3 @@
-
 // app/destinations/[id]/page.tsx
 import Image from 'next/image';
 import Link from 'next/link';
@@ -68,7 +67,7 @@ export default async function DestinationPage({ params }: { params: { id: string
       <section className="relative h-[70vh] w-full flex items-end overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
-            src={destination.imageUrl || '/images/placeholder-destination.jpg'} 
+            src="https://picsum.photos/1920/1080" 
             alt={destination.name} 
             fill 
             priority

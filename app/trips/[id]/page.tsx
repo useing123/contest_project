@@ -61,7 +61,7 @@ export default async function TripDetailPage({ params }: { params: { id: string 
       <section className="relative h-[60vh] w-full flex items-end overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
-            src={trip.destination?.imageUrl || '/images/placeholder-trip.jpg'} 
+            src="https://picsum.photos/1920/1080" 
             alt={trip.name} 
             fill 
             priority

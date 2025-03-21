@@ -14,7 +14,7 @@ export default async function Home() {
       <section className="relative h-[90vh] w-full flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/images/hero-space.jpg" 
+            src="https://picsum.photos/1920/1080" 
             alt="Space view from Dubai" 
             fill 
             priority
@@ -103,7 +103,7 @@ export default async function Home() {
       <section className="py-20 bg-space-gradient relative overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-20">
           <Image 
-            src="/images/stars-bg.jpg" 
+            src="https://picsum.photos/1920/1080" 
             alt="Stars background" 
             fill 
             className="object-cover"
