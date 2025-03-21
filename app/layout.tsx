@@ -13,7 +13,7 @@ export const metadata = {
   description: 'Book your next space adventure with Dubai\'s premier space travel platform. Explore space stations, lunar resorts, and beyond!',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;

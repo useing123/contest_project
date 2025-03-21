@@ -1,4 +1,3 @@
-
 // app/trips/[id]/page.tsx
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -27,7 +26,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-export default async function TripPage({ params }: { params: { id: string } }) {
+export default async function TripDetailPage({ params }: { params: { id: string } }) {
   const trip = await prisma.trip.findUnique({
     where: { id: params.id },
     include: {

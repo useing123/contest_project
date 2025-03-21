@@ -1,4 +1,3 @@
-
 // app/dashboard/bookings/page.tsx
 import { Suspense } from 'react';
 import Link from 'next/link';

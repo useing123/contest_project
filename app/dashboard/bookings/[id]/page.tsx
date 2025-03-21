@@ -1,4 +1,3 @@
-// app/dashboard/bookings/[id]/page.tsx
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';

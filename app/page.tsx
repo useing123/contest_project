@@ -7,7 +7,7 @@ import FeaturedDestinations from '@/components/home/featured-destinations';
 import HeroSearch from '@/components/home/hero-search';
 import Testimonials from '@/components/home/testimonials';
 
-export default function Home() {
+export default async function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}

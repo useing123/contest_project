@@ -1,3 +1,4 @@
+"use client";
 
 // app/dashboard/page.tsx
 import Image from 'next/image';
